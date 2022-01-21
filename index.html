@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>رأس السنة الميلادية</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+
+    
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+   .bg-dark {
+  --bs-bg-opacity: 1;
+  background-image: url("background.jpg");
+}
+.table > :not(caption) > * > * {
+  padding: .5rem .5rem;
+  color: #fff;
+  border-bottom-width: 0px;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  padding-bottom: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+      font-family: cairo;
+
+}
+.table thead th {
+    vertical-align: bottom;
+    font-family: cairo;
+    border-bottom: 2px solid #dee2e6;
+}
+#snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+.pl-3, .px-3 {
+    padding-left: 1rem!important;
+    padding-top: 250px;
+    margin-left: 20%;
+    width: 60%;
+}
+}
+    </style>
+
+
+    <link href="cover.css" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+   
+    </div>
+  </header>
+<div id="snow">
+  <main id="snow" class="px-3">
+<h1>رأس السنة الميلادية <div id="year"></div></h1>
+          </td>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ثانية</th>
+          <th scope="col">دقيقة</th>
+          <th scope="col">ساعة</th>
+          <th scope="col">يوم</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">    <div id="seconds"></div></th>
+          <td>    <div id="minutes"></div>
+          </td>
+          <td>    <div id="hours"></div>
+          </td>
+          <td><div id="days"></div>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </main>
+</div>
+  <footer class="mt-auto text-white-50">
+  </footer>
+</div>
+
+<script>
+  function calculateChristmasCountdown(){
+  
+      //استخراج تاريخ اليوم
+      const d = new Date();
+      
+      //استخراج تاريخ العام القادم للكريسماس باستخدام تاريخ العامالحالي و اضافة واحد له 
+      let year = d.getFullYear()  + 1  ;
+      
+      //استخراج تاريخ اليوم
+      var now = new Date();
+      
+     //ساتخراج تاريخ الشهر الحال و اضافه واحد له لان الجافا تبداء الاعداد من صفر
+      var currentMonth = (now.getMonth() + 1);
+      var currentDay = now.getDate();
+  
+      //استخداج تاريخ العام القادم للكريسماس
+     //و تحديد اليوم الخاص بنهاية العام الحالي
+      var nextChristmasYear = now.getFullYear();
+      if(currentMonth == 12 && currentDay > 31){
+      
+     //في حال كان اليوم تجاوز اليوم المحدد لنهاية العام اضف واحد لقيمه السنه الحالية واحسيب المتبقي للعام التالي
+          nextChristmasYear = nextChristmasYear + 1;
+      }
+    
+      //حساب التوقيت الحالي للجافا اسكريبت بصيغة ISO
+      var nextChristmasDate = nextChristmasYear + '-12-31T00:00:00.000Z';
+      var christmasDay = new Date(nextChristmasDate);
+     
+     //حساب الوقت بالثواني بين القيمتين
+     var diffSeconds = Math.floor((christmasDay.getTime() - now.getTime()) / 1000);
+  
+  
+     //تعريف دوال اليوم و الشهر و السنة للعداد
+      var days = 0;
+      var hours = 0;
+      var minutes = 0;
+      var seconds = 0;
+  
+  
+      //اذا كان تاريخ اليوم هو الكريسماس لاتحسب القيمة واضف واحد للعام التالي
+
+      if(currentMonth != 12 || (currentMonth == 12 && currentDay != 31)){
+      
+    //تحويل المده الي ايام و ساعات ودقائق و ثواني
+          days = Math.floor(diffSeconds / (3600*24));
+          diffSeconds  -= days * 3600 * 24;
+          hours   = Math.floor(diffSeconds / 3600);
+          diffSeconds  -= hours * 3600;
+          minutes = Math.floor(diffSeconds / 60);
+          diffSeconds  -= minutes * 60;
+          seconds = diffSeconds;
+      }
+      
+     //تعريف المتغيرات كدوال للعرض في وسوم ال HTML
+      document.getElementById("year").innerHTML = year;
+      document.getElementById('days').innerHTML = days;
+      document.getElementById('hours').innerHTML = hours ;
+      document.getElementById('minutes').innerHTML = minutes ;
+      document.getElementById('seconds').innerHTML = seconds ;
+      
+          //الحساب كل ثانية للنتيجه ليكون العداد مستمر
+          setTimeout(calculateChristmasCountdown, 1000);
+  }
+  
+  //أضافة الجليد للصفة درس منقول 
+ //https://www.balbooa.com/blog/tips-and-tricks/add-falling-snowflakes-animation-on-your-joomla-site
+  calculateChristmasCountdown();
+  document.addEventListener('DOMContentLoaded', function(){
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.onload = function(){
+        particlesJS("snow", {
+            "particles": {
+                "number": {
+                    "value": 200,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "opacity": {
+                    "value": 0.7,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 5,
+                    "direction": "bottom",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 300,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": {
+                        "enable": false
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": false
+                }
+            },
+            "retina_detect": true
+        });
+    }
+    document.head.append(script);
+});
+  </script>
+</html>
