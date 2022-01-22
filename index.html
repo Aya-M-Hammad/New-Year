@@ -101,25 +101,25 @@
 <script>
   function calculateChristmasCountdown(){
   
-      //استخراج تاريخ اليوم
+      //معرفة تاريخ اليوم
       const d = new Date();
       
-      //استخراج تاريخ العام القادم للكريسماس باستخدام تاريخ العامالحالي و اضافة واحد له 
+      //معرفة تاريخ العام القادم  باستخدام تاريخ العام الحالي و اضافة واحد له 
       let year = d.getFullYear()  + 1  ;
       
       //استخراج تاريخ اليوم
       var now = new Date();
       
-     //ساتخراج تاريخ الشهر الحال و اضافه واحد له لان الجافا تبداء الاعداد من صفر
+     //معرفة تاريخ الشهر الحالي و اضافه واحد له لان الجافا تبداء الاعداد من صفر
       var currentMonth = (now.getMonth() + 1);
       var currentDay = now.getDate();
   
-      //استخداج تاريخ العام القادم للكريسماس
+      //معرفة تاريخ العام القادم 
      //و تحديد اليوم الخاص بنهاية العام الحالي
       var nextChristmasYear = now.getFullYear();
       if(currentMonth == 12 && currentDay > 31){
       
-     //في حال كان اليوم تجاوز اليوم المحدد لنهاية العام اضف واحد لقيمه السنه الحالية واحسيب المتبقي للعام التالي
+     //في حال كان اليوم تجاوز اليوم المحدد لنهاية العام اضف واحد لقيمة السنه الحالية واحسيب المتبقي للعام التالي
           nextChristmasYear = nextChristmasYear + 1;
       }
     
@@ -138,7 +138,7 @@
       var seconds = 0;
   
   
-      //اذا كان تاريخ اليوم هو الكريسماس لاتحسب القيمة واضف واحد للعام التالي
+      //اذا كان تاريخ اليوم هو أخر يوم بالسنة لاتحسب القيمة واضف واحد للعام التالي
 
       if(currentMonth != 12 || (currentMonth == 12 && currentDay != 31)){
       
@@ -163,7 +163,7 @@
           setTimeout(calculateChristmasCountdown, 1000);
   }
   
-  //أضافة الجليد للصفة درس منقول 
+  //أضافة الجليد للصفحة  
  //https://www.balbooa.com/blog/tips-and-tricks/add-falling-snowflakes-animation-on-your-joomla-site
   calculateChristmasCountdown();
   document.addEventListener('DOMContentLoaded', function(){
